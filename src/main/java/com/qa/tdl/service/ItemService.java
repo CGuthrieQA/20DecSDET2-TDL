@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.qa.tdl.dto.ItemDto;
 import com.qa.tdl.persistance.domain.Item;
 import com.qa.tdl.persistance.repo.ItemRepo;
-import com.qa.tdl.utils.ItemUtil;
+import com.qa.tdl.utils.AppUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -52,7 +52,7 @@ public class ItemService {
 		Item toUpdate = this.repo.findById(id)
 				.orElseThrow(); // custom exception later maybe?
 		toUpdate.setName(itemDto.getName());
-		ItemUtil.mergeNotNull(itemDto, toUpdate);
+		AppUtil.mergeNotNull(itemDto, toUpdate);
 		return this.mapToDTO(this.repo.save(toUpdate));
 	}
 

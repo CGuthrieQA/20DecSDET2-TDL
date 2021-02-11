@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.qa.tdl.dto.ToDoListDto;
 import com.qa.tdl.persistance.domain.ToDoList;
 import com.qa.tdl.persistance.repo.ToDoListRepo;
-import com.qa.tdl.utils.ToDoListUtil;
+import com.qa.tdl.utils.AppUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -52,7 +52,7 @@ public class ToDoListService {
 		ToDoList toUpdate = this.repo.findById(id)
 				.orElseThrow(); // custom exception later maybe?
 		toUpdate.setName(toDoListDto.getName());
-		ToDoListUtil.mergeNotNull(toDoListDto, toUpdate);
+		AppUtil.mergeNotNull(toDoListDto, toUpdate);
 		return this.mapToDTO(this.repo.save(toUpdate));
 	}
 	

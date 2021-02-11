@@ -9,7 +9,11 @@ import java.util.Set;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
-public class ToDoListUtil {
+public class AppUtil {
+	
+	private AppUtil() {
+		throw new IllegalStateException("Utility class");
+	}
 	
 	public static void mergeNotNull(Object source, Object target) {
 		copyProperties(source, target, getNullPropName(source));
@@ -27,5 +31,6 @@ public class ToDoListUtil {
 		}
 		return propName.toArray(new String[propName.size()]);
 	}
+
 	
 }
