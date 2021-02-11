@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.qa.tdl.dto.ToDoListDto;
 import com.qa.tdl.persistance.domain.ToDoList;
 import com.qa.tdl.persistance.repo.ToDoListRepo;
+import com.qa.tdl.utils.ToDoListUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,6 +41,15 @@ public class ToDoListService {
 	public ToDoListDto readById(Long id) {
 		return this.mapToDTO(this.repo.findById(id)
 				.orElseThrow()); // custom exception later maybe?
+	}
+	
+	// UPDATE
+	public ToDoListDto update(ToDoListDto toDoListDto, Long id) {
+		ToDoList toUpdate = this.repo.findById(id)
+				.orElseThrow(); // custom exception later maybe?
+		toUpdate.setName(toDoListDto.getName());
+		ToDoListUtil.mergeNotNull(toDoListDto, toUpdate);
+		return this.mapToDTO(this.repo.save(toUpdate));
 	}
 	
 }
