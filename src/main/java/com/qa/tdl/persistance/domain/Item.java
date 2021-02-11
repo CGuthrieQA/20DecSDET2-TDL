@@ -27,7 +27,7 @@ public class Item {
 	private boolean complete;
 	
 	@ManyToOne
-	@JoinColumn(name = "todolist_id", nullable = false)
+	@JoinColumn(name = "toDoList_id", nullable = false)
 	private ToDoList toDoList = null;
 
 	public Item( @NotNull String name, @NotNull boolean complete, ToDoList toDoList) {

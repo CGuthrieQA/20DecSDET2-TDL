@@ -31,7 +31,7 @@ public class ToDoList {
 		@NotNull
 		private boolean complete;
 		
-		@OneToMany(mappedBy="todolist", fetch = FetchType.EAGER)
+		@OneToMany(mappedBy="toDoList", fetch = FetchType.EAGER)
 		@OnDelete(action = OnDeleteAction.CASCADE)
 		private List<Item> items;
 		
