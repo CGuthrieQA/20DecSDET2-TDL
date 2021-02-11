@@ -26,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ItemController {
 
+	@Autowired
 	private ItemService service;
 	
 	// CREATE - post

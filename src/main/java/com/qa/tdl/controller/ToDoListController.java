@@ -25,7 +25,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/todolist")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ToDoListController {
-
+	
+	@Autowired
 	private ToDoListService service;
 	
 	// CREATE - post
