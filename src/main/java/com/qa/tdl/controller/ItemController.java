@@ -18,16 +18,18 @@ import com.qa.tdl.dto.ItemDto;
 import com.qa.tdl.service.ItemService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @CrossOrigin("localhost")
 @RequestMapping("/item")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ItemController {
 
-	@Autowired
 	private ItemService service;
+	
+	@Autowired
+	public ItemController(ItemService service) {
+		this.service = service;
+	}
 	
 	// CREATE - post
 	@PostMapping("/create")

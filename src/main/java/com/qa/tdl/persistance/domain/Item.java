@@ -30,19 +30,17 @@ public class Item {
 	@JoinColumn(name = "toDoList_id", nullable = false)
 	private ToDoList toDoList = null;
 
-	public Item( @NotNull String name, @NotNull boolean complete, ToDoList toDoList) {
+	public Item( @NotNull String name, @NotNull boolean complete) {
 		super();
 		this.name = name;
 		this.complete = complete;
-		this.toDoList = toDoList;
 	}
 
-	public Item(Long id, @NotNull String name, @NotNull boolean complete, ToDoList toDoList) {
+	public Item(Long id, @NotNull String name, @NotNull boolean complete) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.complete = complete;
-		this.toDoList = toDoList;
 	}
 	
 }

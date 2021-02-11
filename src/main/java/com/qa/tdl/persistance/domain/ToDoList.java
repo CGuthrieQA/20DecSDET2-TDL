@@ -35,19 +35,17 @@ public class ToDoList {
 		@OnDelete(action = OnDeleteAction.CASCADE)
 		private List<Item> items;
 		
-		public ToDoList(@NotNull String name, @NotNull boolean complete, List<Item> items) {
+		public ToDoList(@NotNull String name, @NotNull boolean complete) {
 			super();
 			this.name = name;
 			this.complete = complete;
-			this.items = items;
 		}
 
-		public ToDoList(Long id, @NotNull String name, @NotNull boolean complete, List<Item> items) {
+		public ToDoList(Long id, @NotNull String name, @NotNull boolean complete) {
 			super();
 			this.id = id;
 			this.name = name;
 			this.complete = complete;
-			this.items = items;
 		}
 		
 }

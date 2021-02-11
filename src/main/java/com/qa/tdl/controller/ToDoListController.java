@@ -18,16 +18,18 @@ import com.qa.tdl.dto.ToDoListDto;
 import com.qa.tdl.service.ToDoListService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @CrossOrigin("localhost")
 @RequestMapping("/todolist")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ToDoListController {
 	
-	@Autowired
 	private ToDoListService service;
+	
+	@Autowired
+	public ToDoListController(ToDoListService service) {
+		this.service = service;
+	}
 	
 	// CREATE - post
 	@PostMapping("/create")

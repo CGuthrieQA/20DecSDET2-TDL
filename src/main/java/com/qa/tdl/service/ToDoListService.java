@@ -12,15 +12,19 @@ import com.qa.tdl.persistance.domain.ToDoList;
 import com.qa.tdl.persistance.repo.ToDoListRepo;
 import com.qa.tdl.utils.AppUtil;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+//@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ToDoListService {
 
 	private final ToDoListRepo repo;
 	
 	private final ModelMapper mapper;
+	
+	@Autowired
+	public ToDoListService(ToDoListRepo repo, ModelMapper mapper) {
+		this.repo = repo;
+		this.mapper = mapper;
+	}
 	
 	private ToDoListDto mapToDTO(ToDoList toDoList) {
 		return this.mapper.map(toDoList, ToDoListDto.class);
