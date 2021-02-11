@@ -36,4 +36,10 @@ public class ToDoListService {
 				.stream().map(this::mapToDTO).collect(Collectors.toList());
 	}
 	
+	// READ ONE
+	public ToDoListDto readById(Long id) {
+		return this.mapToDTO(this.repo.findById(id)
+				.orElseThrow()); // custom exception later maybe?
+	}
+	
 }
