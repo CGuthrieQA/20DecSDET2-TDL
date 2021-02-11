@@ -1,9 +1,13 @@
 package com.qa.tdl.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,4 +33,17 @@ public class ItemController {
 		ItemDto created = this.service.create(item);
 		return new ResponseEntity<>(created, HttpStatus.CREATED);
 	}
+	
+	// READ - get (all)
+	@GetMapping("/read")
+	public ResponseEntity<List<ItemDto>> readAll() {
+		return ResponseEntity.ok(this.service.readAll());
+	}
+	
+	// get one
+	@GetMapping("/read/{id}")
+	public ResponseEntity<ItemDto> readById(@PathVariable Long id) {
+		return ResponseEntity.ok(this.service.readById(id));
+	}
+		
 }
