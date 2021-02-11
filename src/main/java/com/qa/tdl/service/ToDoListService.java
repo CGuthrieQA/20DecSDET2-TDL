@@ -52,4 +52,10 @@ public class ToDoListService {
 		return this.mapToDTO(this.repo.save(toUpdate));
 	}
 	
+	// DELETE
+	public boolean delete(Long id) {
+		this.repo.deleteById(id);
+		return !this.repo.existsById(id);
+	}
+	
 }
