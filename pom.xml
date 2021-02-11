@@ -71,20 +71,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			
-			<!-- Creates a jar for the code (does not contain other dependencies which 
-				are needed for the project to run out of the box) -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>com.qa.tdl.Application</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
+				
 			</plugin>
 			
 			<!-- Creates a "fat jar" with jar-with-dependencies at the end of the 
@@ -109,12 +96,12 @@
 							<archive>
 								<manifest>
 									<mainClass>
-										com.qa.ims.Application
+										com.qa.tdl.Application
 									</mainClass>
 								</manifest>
 							</archive>
 							<descriptorRefs>
-								<descriptorRef>fatjar</descriptorRef>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
 							</descriptorRefs>
 						</configuration>
 					</execution>
