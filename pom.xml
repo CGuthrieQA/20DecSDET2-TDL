@@ -66,10 +66,29 @@
 
 	<build>
 		<plugins>
+		
+			<!-- default spring boot build -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			<!-- Creates a jar for the code (does not contain other dependencies which 
+				are needed for the project to run out of the box) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.qa.tdl.Application</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			
 		</plugins>
 	</build>
 
