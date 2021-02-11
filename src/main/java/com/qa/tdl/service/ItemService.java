@@ -1,5 +1,8 @@
 package com.qa.tdl.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,18 @@ public class ItemService {
 	// CREATE
 	public ItemDto create(Item item) {
 		return this.mapToDTO(this.repo.save(item));
+	}
+	
+	// READ ALL
+	public List<ItemDto> readAll() {
+		return this.repo.findAll()
+				.stream().map(this::mapToDTO).collect(Collectors.toList());
+	}
+	
+	// READ ONE
+	public ItemDto readById(Long id) {
+		return this.mapToDTO(this.repo.findById(id)
+				.orElseThrow()); // custom exception later maybe?
 	}
 
 }
