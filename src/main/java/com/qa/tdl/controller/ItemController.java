@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.tdl.dto.ItemDto;
+import com.qa.tdl.persistance.domain.Item;
 import com.qa.tdl.service.ItemService;
 
 
@@ -33,8 +34,8 @@ public class ItemController {
 	
 	// CREATE - post
 	@PostMapping("/create")
-	public ResponseEntity<ItemDto> create(@RequestBody ItemDto itemDto) {
-		ItemDto created = this.service.create(itemDto);
+	public ResponseEntity<ItemDto> create(@RequestBody Item item) {
+		ItemDto created = this.service.create(item);
 		return new ResponseEntity<>(created, HttpStatus.CREATED);
 	}
 	

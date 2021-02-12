@@ -26,13 +26,9 @@ public class ItemService {
 		return this.mapper.map(item, ItemDto.class);
 	}
 	
-	private Item mapFromDTO(ItemDto itemDto) {
-		return this.mapper.map(itemDto, Item.class);
-	}
-	
 	// CREATE
-	public ItemDto create(ItemDto itemDto) {
-		return this.mapToDTO(this.repo.save(this.mapFromDTO(itemDto)));
+	public ItemDto create(Item item) {
+		return this.mapToDTO(this.repo.save(item));
 	}
 	
 	// READ ALL
