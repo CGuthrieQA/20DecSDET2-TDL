@@ -22,12 +22,6 @@ public class ItemService {
 
 	private final ModelMapper mapper;
 	
-//	@Autowired
-//	public ItemService(ItemRepo repo, ModelMapper mapper) {
-//		this.repo = repo;
-//		this.mapper = mapper;
-//	}
-	
 	private ItemDto mapToDTO(Item item) {
 		return this.mapper.map(item, ItemDto.class);
 	}

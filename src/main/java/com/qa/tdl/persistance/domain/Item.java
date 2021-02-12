@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -26,9 +25,9 @@ public class Item {
 	@NotNull
 	private boolean complete;
 	
-	@ManyToOne
-	@JoinColumn(name = "toDoList_id", nullable = false)
-	private ToDoList toDoList = null;
+	@NotNull
+	@ManyToOne()
+	private ToDoList toDoList;
 
 	public Item( @NotNull String name, @NotNull boolean complete) {
 		super();
