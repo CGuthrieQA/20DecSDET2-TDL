@@ -12,19 +12,21 @@ import com.qa.tdl.persistance.domain.Item;
 import com.qa.tdl.persistance.repo.ItemRepo;
 import com.qa.tdl.utils.AppUtil;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
-//@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ItemService {
 	
 	private final ItemRepo repo;
 
 	private final ModelMapper mapper;
 	
-	@Autowired
-	public ItemService(ItemRepo repo, ModelMapper mapper) {
-		this.repo = repo;
-		this.mapper = mapper;
-	}
+//	@Autowired
+//	public ItemService(ItemRepo repo, ModelMapper mapper) {
+//		this.repo = repo;
+//		this.mapper = mapper;
+//	}
 	
 	private ItemDto mapToDTO(Item item) {
 		return this.mapper.map(item, ItemDto.class);
