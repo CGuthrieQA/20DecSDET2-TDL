@@ -1,0 +1,12 @@
+a {
+    text-decoration: none
+}
+
+.pill-wrap {
+    width:30%;
+}
+
+.btn:focus,.btn:active:focus,.btn.active:focus,
+.btn.focus,.btn:active.focus,.btn.active.focus {
+    box-shadow: none!important;
+}
