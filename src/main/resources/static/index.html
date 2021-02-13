@@ -8,12 +8,12 @@
     <link href="./src/css/bootstrap.css" rel="stylesheet">
     <link href="./src/css/custom_style.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-dark">
 <!-- class="bg-secondary" -->
 
     <main class="container">
         <!-- top of page stuff in here -->
-        <section class="row mb-3">
+        <section class="row mb-3 text-light">
             <article class="col-12">
                 <h1 class="display-1">To-Do List</h1>
             </article>
@@ -26,10 +26,10 @@
             <form class="">
                 <div class="row g-2 flex-row">
                     <div class="col-auto flex-grow-1">
-                        <input type="text" class="form-control" placeholder="new to-do list name">
+                        <input type="text" class="form-control border border-dark rounded-0" placeholder="new to-do list name">
                     </div>
                     <div class="col-auto">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary border border-dark">
                             <span class="p-2">Create</span>
                         </button>
                     </div>
@@ -38,20 +38,20 @@
         </section>
 
         <!-- to do list -->
-        <section class="mb-3 container-fluid rounded shadow-sm border border-primary">
+        <article class="mb-3 container-fluid rounded-0 shadow-sm border border-dark">
             
             <span class="d-none" id="todolist-1-json">'{"id":1,"name":"Lorem ipsum","completed":false,"items":[{"id":1,"name":"This will be a list item.","completed":false}]}'</span>
 
-            <div class="row bg-light rounded position-relative">
+            <div class="row bg-light rounded-0 position-relative">
                 <div class="col-12 mt-2">
                     <div class="row g-2 flex-row-reverse">
                         <div class="col-auto">
-                            <button type="" class="btn btn-danger btn-sm">
+                            <button type="" class="btn btn-danger btn-sm rounded-0">
                                 <span class="p-2">Delete</span>
                             </button> 
                         </div>
                         <div class="col-auto">
-                            <button type="" class="btn btn-secondary btn-sm">
+                            <button type="" class="btn btn-secondary btn-sm rounded-0">
                                 <span class="p-2">Update</span>
                             </button>
                         </div>
@@ -59,15 +59,15 @@
                 </div>
                 
                 <div class="position-absolute pill-wrap">
-                    <h5 class="">
-                        <span class="position-relative mt-2 badge bg-dark">id: 1</span>
-                    </h5>
+                    <h6 class="">
+                        <span class="position-relative mt-2 badge bg-dark  rounded-0">id: 1</span>
+                    </h6>
                 </div>
                     
                 <div class="col-12 pt-1 mb-0">
                     <div class="d-flex g-2">
                         <div class="me-auto">
-                            <h6 class="rounded display-6 p-2">
+                            <h6 class="rounded-0 display-6 p-2">
                                 Lorem ipsum
                             </h6>
                         </div>
@@ -83,16 +83,16 @@
                     <form class="mb-2">
                         <div class="g-2 d-flex">
                             <div class="flex-grow-1 me-2">
-                                <input type="text" class="form-control" placeholder="new list item name">
+                                <input type="text" class="form-control rounded-0" placeholder="new list item name">
                             </div>
                             <div class="">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary border border-primary rounded-0">
                                     <span class="p-2">Create</span>
                                 </button>
                             </div>
                         </div>
                     </form>
-                    <div class="rounded shadow-sm border border-secondary p-2">
+                    <div class="rounded-0 shadow-sm border border-secondary p-2">
                         <span class="d-none" id="item-1-json">'{"id":1,"name":"This will be a list item.","completed":false,"toDoList":{"id":1}}'</span>
                         <div class="d-flex g-2">
                             <div class="me-auto">
@@ -101,12 +101,12 @@
                                 </p>
                             </div>
                             <div class="me-2">
-                                <button type="" class="btn btn-secondary btn-sm">
+                                <button type="" class="btn btn-secondary btn-sm rounded-0">
                                     <span class="p-2">Update</span>
                                 </button>
                             </div>
                             <div class="">
-                                <button type="" class="btn btn-danger btn-sm">
+                                <button type="" class="btn btn-danger btn-sm rounded-0">
                                     <span class="p-2">Delete</span>
                                 </button> 
                             </div>
@@ -115,7 +115,7 @@
                 </div>
 
             </div>
-        </section>
+        </article>
 
     </main>
 
