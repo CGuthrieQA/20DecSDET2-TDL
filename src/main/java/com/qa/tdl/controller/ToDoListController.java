@@ -20,7 +20,7 @@ import com.qa.tdl.persistance.domain.ToDoList;
 import com.qa.tdl.service.ToDoListService;
 
 @RestController
-@CrossOrigin("localhost")
+@CrossOrigin
 @RequestMapping("/todolist")
 public class ToDoListController {
 	

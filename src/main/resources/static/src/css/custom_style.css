@@ -10,3 +10,7 @@ a {
 .btn.focus,.btn:active.focus,.btn.active.focus {
     box-shadow: none!important;
 }
+
+.border-custom {
+  border: 1px solid #ced4da;
+}
