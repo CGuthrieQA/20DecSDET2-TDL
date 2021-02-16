@@ -18,16 +18,17 @@ const deleteToDoList = (id) => {
 
 }
 
-const doDeleteToDoList = async() => {
+const assignDeleteToDoListButtons = async() => {
 
     return new Promise((resolve,reject)=>{
         setTimeout(()=>{
             document.querySelectorAll(".button-delete-todolist").forEach( btn => {
-                console.log(btn.id.charAt(0));
-                btn.addEventListener("click", () => { deleteToDoList(btn.id.charAt(0)) }); // assign anonymous function to call another function
+                let splitstring = btn.id.split('-');
+                console.log(splitstring[0]);
+                btn.addEventListener("click", () => { deleteToDoList(splitstring[0]) }); // assign anonymous function to call another function
             });
 
             resolve();
-        },500);
+        },200);
     });
 }

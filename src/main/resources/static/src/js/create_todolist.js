@@ -24,6 +24,7 @@ const postToDoList = (event) => {
         })
         .catch( (err) => console.error(err) );
 
+    document.querySelector("#input_todolist_name").value = "";
     doThings();
 }
 
