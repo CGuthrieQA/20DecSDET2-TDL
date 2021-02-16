@@ -1,6 +1,7 @@
 'use strict'
 
 const postToDoList = (event) => {
+
     event.preventDefault();
     const inputToDoListName = document.querySelector("#input_todolist_name").value;
     const newToDoList = {
@@ -23,8 +24,7 @@ const postToDoList = (event) => {
         })
         .catch( (err) => console.error(err) );
 
-    getToDoLists();
-
+    doThings();
 }
 
 const submit = document.querySelector("#create_todolist").addEventListener("submit", postToDoList);
