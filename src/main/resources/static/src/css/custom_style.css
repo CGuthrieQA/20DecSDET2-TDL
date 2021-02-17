@@ -14,3 +14,7 @@ a {
 .border-custom {
   border: 1px solid #ced4da;
 }
+
+.customListItem:before {
+    content: "- ";
+}

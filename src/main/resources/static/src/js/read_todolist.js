@@ -13,7 +13,7 @@ const getToDoLists = () => {
                 : 
                 response.json()
                     .then( (data) => {
-                        console.info(data);
+                        //console.info(data);
                         
                         for (let n of data ) {
                             const new_article = document.createElement(`article`);
@@ -29,23 +29,23 @@ const getToDoLists = () => {
                                             </button> 
                                         </div>
                                         <div class="col-auto">
-                                            <button type="button" class="btn btn-secondary btn-sm rounded-0">
+                                            <button type="button" class="btn btn-secondary btn-sm rounded-0" id="todolist-update-button-` + n.id + `">
                                                 <span class="p-2">Update</span>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="position-absolute pill-wrap">
                                     <h6 class="">
                                         <span class="position-relative mt-2 badge bg-dark  rounded-0">id: ` + n.id + `</span>
                                     </h6>
                                 </div>
-                                    
+
                                 <div class="col-12 pt-1 mb-0">
-                                    <div class="d-flex g-2">
+                                    <div class="d-flex g-2" id="todolist-name-container-` + n.id + `">
                                         <div class="me-auto">
-                                            <h6 class="rounded-0 display-6 p-2">
+                                            <h6 class="rounded-0 display-6 p-2" id="todolist-name-` + n.id + `">
                                             ` + n.name + `
                                             </h6>
                                         </div>
@@ -80,6 +80,9 @@ const getToDoLists = () => {
                             const btnToDoListDelete = document.querySelector(`#todolist-delete-button-` + n.id );
                             btnToDoListDelete.addEventListener("click", () => { deleteToDoList(n.id) });
 
+                            const btnToDoListUpdate = document.querySelector(`#todolist-update-button-` + n.id );
+                            btnToDoListUpdate.addEventListener("click", () => { updateToDoListStart(n.id, btnToDoListUpdate) });
+
                             const formCreateItem = document.querySelector("#create-item-form-" + n.id);
                             formCreateItem.addEventListener("submit", (event) => { postItem(n.id , event) });
 
@@ -91,7 +94,7 @@ const getToDoLists = () => {
                                 <span class="d-none" id="item-` + item.id + `-json">'` + JSON.stringify(item) + `'</span>
                                 <div class="d-flex g-2">
                                     <div class="me-auto">
-                                        <p class="lead p-0 mb-0">
+                                        <p class="lead p-0 mb-0 customListItem">
                                             `+ item.name +`
                                         </p>
                                     </div>
