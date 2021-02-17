@@ -78,7 +78,7 @@ const getToDoLists = () => {
                             list_todolist.append(new_article);
 
                             const btnToDoListDelete = document.querySelector(`#todolist-delete-button-` + n.id );
-                            btnToDoListDelete.addEventListener("click", () => { deleteToDoList(n.id) });
+                            btnToDoListDelete.addEventListener("click", (event) => { deleteToDoList(n.id, event) });
 
                             const btnToDoListUpdate = document.querySelector(`#todolist-update-button-` + n.id );
                             btnToDoListUpdate.addEventListener("click", () => { updateToDoListStart(n.id, btnToDoListUpdate) });
@@ -89,7 +89,8 @@ const getToDoLists = () => {
                             for ( let item of n.items ){
                                 const todolistToggle = document.querySelector("#Toggle-" + n.id);
                                 const new_item = document.createElement(`div`);
-                                new_item.className += "rounded-0 shadow-sm border border-custom p-2 mt-2";
+                                new_item.className = "rounded-0 shadow-sm border border-custom p-2 mt-2";
+                                new_item.id = "item-id-" + item.id;
                                 new_item.innerHTML = `
                                 <span class="d-none" id="item-` + item.id + `-json">'` + JSON.stringify(item) + `'</span>
                                 <div class="d-flex g-2">
@@ -114,12 +115,11 @@ const getToDoLists = () => {
                                 todolistToggle.append(new_item);
 
                                 const btnItemDelete = document.querySelector(`#item-delete-` + item.id);
-                                btnItemDelete.addEventListener("click", () => { deleteItems(item.id) });
+                                btnItemDelete.addEventListener("click", (event) => { deleteItems(item.id, event) });
                             }
                         };
                     
                     });
         })
         .catch( (err) => console.error(err) ); 
-
 }

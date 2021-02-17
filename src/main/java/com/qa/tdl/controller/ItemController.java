@@ -21,7 +21,7 @@ import com.qa.tdl.service.ItemService;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin("http://127.0.0.1:9090")
 @RequestMapping("/item")
 public class ItemController {
 

@@ -23,12 +23,12 @@ const postItem = (id, event) => {
                 console.error(`HTTP status code [${response.status}]`)
                 : 
                 response.json()
-                    .then( (data) => console.info(`successful [POST] response: ${JSON.stringify(data)}`) );    
+                    .then( (data) => getOneItem(id, data.id) );    
         })
         .catch( (err) => console.error(err) );
 
     document.querySelector("#item-create-input-" + id ).value = "";
-    
-    setTimeout( () => { getToDoLists() }, 100);
+
+    //setTimeout( () => { getToDoLists() }, 100);
 
 }

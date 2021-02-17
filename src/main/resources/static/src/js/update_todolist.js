@@ -6,7 +6,7 @@ const updateToDoListStart = (id, updateButton) => {
     const name = document.querySelector("#todolist-name-" + id).textContent.trim();
 
     nameContainer.innerHTML = `
-    <form class="mb-2 col-12" id="update-todolist-form-` + id + `">
+    <form class="pb-3 pt-2 col-12" id="update-todolist-form-` + id + `">
         <div class="g-2 d-flex">
             <div class="flex-grow-1 me-2">
                 <input type="text" class="form-control rounded-0" id="update-todolist-input-` + id + `" placeholder="` + name + `">
@@ -17,7 +17,7 @@ const updateToDoListStart = (id, updateButton) => {
                 </button>
             </div>
             <div class="">
-                <button type="cancel" class="btn btn rounded-0 btn-warning border border-warning" id="">
+                <button type="reset" class="btn btn rounded-0 btn-warning border border-warning" id="">
                     <span class="p-2">Cancel</span>
                 </button>
             </div>
@@ -25,31 +25,87 @@ const updateToDoListStart = (id, updateButton) => {
     </form>
     `;
 
-    updateButton.className = ".d-none";
-    // updateButton.innerHTML = `<span class="p-2">Cancel</span>`;
+    updateButton.disabled = true;
 
-    //this.outerHTML = this.outerHTML;
+    const formToDoListCancel = document.querySelector(`#update-todolist-form-` + id );
+    formToDoListCancel.addEventListener("reset", (event) => { updateToDoListCancel(id, updateButton, name, event) });
 
-    //updateButton.addEventListener("click", () => { updateToDoListCancel(id, document.querySelector(`#todolist-update-button-` + id)) });
-
-    const formToDoListUpdate = document.querySelector(`#update-todolist-form-` + id );
-    formToDoListUpdate.addEventListener("cancel", () => { updateToDoListCancel(id, updateButton) });
-
-    const formToDoListUpdate = document.querySelector(`#update-todolist-form-` + id );
-    formToDoListUpdate.addEventListener("submit", () => { updateToDoListSubmit(id, updateButton) });
+    const formToDoListSubmit = document.querySelector(`#update-todolist-form-` + id );
+    formToDoListSubmit.addEventListener("submit", (event) => { updateToDoListSubmit(id, updateButton, event) });
 
 }
 
-const updateToDoListSubmit = (id, updateButton) => {
+const updateToDoListSubmit = (id, updateButton, event) => {
+    event.preventDefault();
+    updateButton.disabled = false;
+
+    const newName = document.querySelector("#update-todolist-input-" + id).value;
     
-    updateButton.className = "btn btn-secondary btn-sm rounded-0";
+    fetch(`http://127.0.0.1:9090/todolist/read/${id}`)
+        .then( (response) => {
+            (response.status !== 200) ? // OK
+                console.error(`HTTP status code [${response.status}]`)
+                : 
+                response.json()
+                    .then( (dataGet) => {
+                        dataGet.name = newName;
+
+                        nestedFetch(dataGet, id);
+
+                    });
+                    
+        })
+        .catch( (err) => console.error(err) ); 
 
 }
 
-const updateToDoListCancel = (id, updateButton) => {
+const nestedFetch = (dataGet, id) => {
+    console.log(dataGet);
+    fetch(`http://127.0.0.1:9090/todolist/update/${id}`, {
+        method : `PUT`, // set the method
+        headers : { // set headers (what kind of data it is expecting)
+            "Content-type":"application/json"
+        },
+        body : JSON.stringify(dataGet)
+    }).then( (response) => {
+        (response.status !== 202) ? // ACCEPTED
+            console.error(`status ${response.status}`)
+            : 
+            response.json()
+                .then( (data) => {
+                    console.info(`successful [PUT] response: ${JSON.stringify(data)}`);
+                    document.querySelector("#todolist-name-container-" + id).innerHTML = `
+                        <div class="me-auto">
+                            <h6 class="rounded-0 display-6 p-2" id="todolist-name-` + data.id + `">
+                            ` + data.name + `
+                            </h6>
+                        </div>
+                        <div class="">
+                            <button class="btn btn-light btn-block" type="button" data-bs-toggle="collapse" data-bs-target="#Toggle-` + data.id + `" aria-controls="Toggle-` + data.id + `" aria-expanded="false" aria-label="Toggle navigation">
+                                <h6 class="display-6">&rsaquo;</h6>
+                            </button>
+                        </div>
+                    `;
+            });    
+    })
+    .catch( (err) => console.error(err) );
+}
 
-    updateButton.className = "btn btn-secondary btn-sm rounded-0";
-    // updateButton.innerHTML = `<span class="p-2">Update</span>`;
-    // updateButton.addEventListener("click", () => { updateToDoListStart(id, updateButton) });
+const updateToDoListCancel = (id, updateButton, name, event) => {
+    event.preventDefault();
+    updateButton.disabled = false;
+
+    document.querySelector("#todolist-name-container-" + id).innerHTML = `
+        <div class="me-auto">
+            <h6 class="rounded-0 display-6 p-2" id="todolist-name-` + id + `">
+            ` + name + `
+            </h6>
+        </div>
+        <div class="">
+            <button class="btn btn-light btn-block" type="button" data-bs-toggle="collapse" data-bs-target="#Toggle-` + id + `" aria-controls="Toggle-` + id + `" aria-expanded="false" aria-label="Toggle navigation">
+                <h6 class="display-6">&rsaquo;</h6>
+            </button>
+        </div>
+    `;
 
 }

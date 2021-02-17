@@ -20,7 +20,7 @@ import com.qa.tdl.persistance.domain.ToDoList;
 import com.qa.tdl.service.ToDoListService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("http://127.0.0.1:9090")
 @RequestMapping("/todolist")
 public class ToDoListController {
 	
