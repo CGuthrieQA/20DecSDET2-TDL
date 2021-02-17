@@ -97,7 +97,7 @@ const getToDoLists = async() => {
                                                 </button>
                                             </div>
                                             <div class="">
-                                                <button type="button"  id="` + item.id + `-item-delete" class="btn-item delete btn btn-danger btn-sm rounded-0">
+                                                <button type="button"  id="` + item.id + `-item-delete" class="btn-item-delete btn btn-danger btn-sm rounded-0">
                                                     <span class="p-2">Delete</span>
                                                 </button>
                                             </div>

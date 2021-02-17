@@ -6,6 +6,7 @@ async function doThings() {
     //await doUpdateToDoList();
     //await getItems();
     await assignCreateItemButtons();
+    await assignDeleteItemButtons();
 }
 
 doThings();
