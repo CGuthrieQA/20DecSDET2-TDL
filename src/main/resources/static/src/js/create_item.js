@@ -28,20 +28,7 @@ const postItem = (id, event) => {
         .catch( (err) => console.error(err) );
 
     document.querySelector("#item-create-input-" + id ).value = "";
-    doThings();
-}
+    
+    setTimeout( () => { getToDoLists() }, 100);
 
-const assignCreateItemButtons = async() => {
-
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            document.querySelectorAll(".create-item-form").forEach( form => {
-                let splitstring = form.id.split('-');
-                console.log(splitstring[0]);
-                form.addEventListener("submit", (event) => { postItem(splitstring[0], event) }); // assign anonymous function to call another function
-            });
-
-            resolve();
-        },200);
-    });
 }

@@ -13,22 +13,7 @@ const deleteToDoList = (id) => {
                 .then( (data) => console.info(`successful [DELETE] response: ${JSON.stringify(data)}`) );    
     })
     .catch( (err) => console.error(err) );
+    
+    setTimeout( () => { getToDoLists() }, 100);
 
-    doThings();
-
-}
-
-const assignDeleteToDoListButtons = async() => {
-
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            document.querySelectorAll(".button-delete-todolist").forEach( btn => {
-                let splitstring = btn.id.split('-');
-                console.log(splitstring[0]);
-                btn.addEventListener("click", () => { deleteToDoList(splitstring[0]) }); // assign anonymous function to call another function
-            });
-
-            resolve();
-        },200);
-    });
 }

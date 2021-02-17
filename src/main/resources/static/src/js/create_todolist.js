@@ -25,7 +25,9 @@ const postToDoList = (event) => {
         .catch( (err) => console.error(err) );
 
     document.querySelector("#input_todolist_name").value = "";
-    doThings();
+    
+    setTimeout( () => { getToDoLists() }, 100);
+
 }
 
 const submit = document.querySelector("#create_todolist").addEventListener("submit", postToDoList);
