@@ -95,7 +95,7 @@ const getToDoLists = () => {
                                 <span class="d-none" id="item-` + item.id + `-json">'` + JSON.stringify(item) + `'</span>
                                 <div class="d-flex g-2">
                                     <div class="me-auto">
-                                        <p class="lead p-0 mb-0 customListItem">
+                                        <p class="lead p-0 mb-0 customListItem" id="item-name-` + item.id + `">
                                             `+ item.name +`
                                         </p>
                                     </div>
@@ -116,6 +116,9 @@ const getToDoLists = () => {
 
                                 const btnItemDelete = document.querySelector(`#item-delete-` + item.id);
                                 btnItemDelete.addEventListener("click", (event) => { deleteItems(item.id, event) });
+
+                                const btnItemUpdate = document.querySelector(`#item-update-` + item.id);
+                                btnItemUpdate.addEventListener("click", () => { updateItemStart(item.id, btnItemUpdate) });
                             }
                         };
                     

@@ -16,5 +16,5 @@ a {
 }
 
 .customListItem:before {
-    content: "- ";
+    content: "- "!important;
 }

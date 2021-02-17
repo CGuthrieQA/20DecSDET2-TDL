@@ -19,7 +19,7 @@ const getOneItem = (todolistId, itemId) => {
                         <span class="d-none" id="item-` + data.id + `-json">'` + JSON.stringify(data) + `'</span>
                         <div class="d-flex g-2">
                             <div class="me-auto">
-                                <p class="lead p-0 mb-0 customListItem">
+                                <p class="lead p-0 mb-0 customListItem" id="item-name-` + data.id + `">
                                     `+ data.name +`
                                 </p>
                             </div>
@@ -37,8 +37,12 @@ const getOneItem = (todolistId, itemId) => {
                         `;
 
                         todolistToggle.append(new_item);
+
                         const btnItemDelete = document.querySelector(`#item-delete-` +  data.id);
                         btnItemDelete.addEventListener("click", (event) => { deleteItems(data.id, event) });
+                        
+                        const btnItemUpdate = document.querySelector(`#item-update-` + data.id);
+                        btnItemUpdate.addEventListener("click", () => { updateItemStart(data.id, btnItemUpdate) });
                     })
         })
         .catch( (err) => console.error(err) ); 
