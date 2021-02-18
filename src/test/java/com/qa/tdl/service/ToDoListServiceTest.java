@@ -87,4 +87,18 @@ public class ToDoListServiceTest {
 		verify(this.repo, atLeastOnce()).findById(id);
 		verify(this.repo, atLeastOnce()).save(testToDoList3);
 	}
+	
+	@Test
+	void deleteTest() throws Exception {
+		Long id = 4L;
+		Long badId = -99999L;
+		
+		when(this.repo.existsById(id)).thenReturn(false);
+		when(this.repo.existsById(badId)).thenReturn(true);
+		assertEquals( true , (this.service.delete(id)) );
+		assertEquals( false , (this.service.delete(badId)) );
+		
+		verify(this.repo, atLeastOnce()).existsById(id);
+	}
+	
 }
