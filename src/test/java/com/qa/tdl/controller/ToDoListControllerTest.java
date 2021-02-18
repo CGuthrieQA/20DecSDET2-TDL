@@ -80,4 +80,15 @@ public class ToDoListControllerTest {
 		verify(this.service, atLeastOnce()).readById(id);
 	}
 	
+	@Test
+	void updateTest() throws Exception {
+		Long id = 3L;
+		ToDoListDto newDto = this.mapToDTO(testToDoList3);
+		
+		when(this.service.update(newDto, id)).thenReturn(newDto);
+		assertEquals(new ResponseEntity<ToDoListDto>(newDto, HttpStatus.ACCEPTED) , this.controller.update(id, newDto) );
+		
+		verify(this.service, atLeastOnce()).update(newDto, id);
+	}
+	
 }
