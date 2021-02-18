@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.qa</groupId>
 	<artifactId>20DecSDET2-TDL</artifactId>
-	<version>0.1</version>
+	<version>0.2</version>
 	<name>20DecSDET2-TDL</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
