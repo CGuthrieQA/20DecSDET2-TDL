@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.tdl.dto.ToDoListDto;
-import com.qa.tdl.persistance.domain.ToDoList;
 import com.qa.tdl.service.ToDoListService;
 
 @RestController
@@ -33,8 +32,8 @@ public class ToDoListController {
 	
 	// CREATE - post
 	@PostMapping("/create")
-	public ResponseEntity<ToDoListDto> create(@RequestBody ToDoList toDoList) {
-		ToDoListDto created = this.service.create(toDoList);
+	public ResponseEntity<ToDoListDto> create(@RequestBody ToDoListDto toDoListDto) {
+		ToDoListDto created = this.service.create(toDoListDto);
 		return new ResponseEntity<>(created, HttpStatus.CREATED);
 	}
 	

@@ -47,5 +47,10 @@ public class ToDoList {
 			this.name = name;
 			this.complete = complete;
 		}
+
+		public ToDoList(Long id) {
+			super();
+			this.id = id;
+		}
 		
 }

@@ -6,13 +6,13 @@ const postItem = (id, event) => {
     const inputItemName = document.querySelector("#item-create-input-" + id ).value;
     const newItem = {
         "name" : inputItemName,
-        "complete" : false,
-        "toDoList" : {
-            "id" : id
-        }
+        "complete" : false//,
+        // "toDoList" : {
+        //     "id" : id
+        // }
     };
 
-    fetch(`http://127.0.0.1:9090/item/create/`, {
+    fetch(`http://127.0.0.1:9090/item/create/${id}`, {
         method : `POST`, // set the method
         headers : { // set headers (what kind of data it is expecting)
             "Content-type":"application/json"

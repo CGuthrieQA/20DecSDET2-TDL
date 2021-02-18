@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.qa.tdl.dto.ItemDto;
 import com.qa.tdl.persistance.domain.Item;
+import com.qa.tdl.persistance.domain.ToDoList;
 import com.qa.tdl.persistance.repo.ItemRepo;
 import com.qa.tdl.utils.AppUtil;
 
@@ -26,9 +27,16 @@ public class ItemService {
 		return this.mapper.map(item, ItemDto.class);
 	}
 	
+	private Item mapFromDTO(ItemDto itemDto) {
+		return this.mapper.map(itemDto, Item.class);
+	}
+	
 	// CREATE
-	public ItemDto create(Item item) {
-		return this.mapToDTO(this.repo.save(item));
+	public ItemDto create(ItemDto itemDto, Long listId) {
+		Item newItem = this.mapFromDTO(itemDto);
+		newItem.setToDoList(new ToDoList(listId));
+		Item saveItem = this.repo.save(newItem);
+		return this.mapToDTO(saveItem);
 	}
 	
 	// READ ALL

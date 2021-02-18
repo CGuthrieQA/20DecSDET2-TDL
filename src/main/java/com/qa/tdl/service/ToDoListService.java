@@ -26,9 +26,13 @@ public class ToDoListService {
 		return this.mapper.map(toDoList, ToDoListDto.class);
 	}
 	
+	private ToDoList mapFromDTO(ToDoListDto toDoListDto) {
+		return this.mapper.map(toDoListDto, ToDoList.class);
+	}
+	
 	// CREATE
-	public ToDoListDto create(ToDoList toDoList) {
-		return this.mapToDTO(this.repo.save(toDoList));
+	public ToDoListDto create(ToDoListDto toDoListDto) {
+		return this.mapToDTO(this.repo.save(this.mapFromDTO(toDoListDto)));
 	}
 	
 	// READ ALL
