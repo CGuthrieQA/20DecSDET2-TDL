@@ -76,4 +76,15 @@ public class ItemControllerTest {
 		
 		verify(this.service, atLeastOnce()).readById(id);
 	}
+	
+	@Test
+	void updateTest() throws Exception {
+		Long id = 3L;
+		ItemDto newDto = this.mapToDTO(testItem3);
+		
+		when(this.service.update(newDto, id)).thenReturn(newDto);
+		assertEquals(new ResponseEntity<ItemDto>(newDto, HttpStatus.ACCEPTED) , this.controller.update(id, newDto) );
+		
+		verify(this.service, atLeastOnce()).update(newDto, id);
+	}
 }
