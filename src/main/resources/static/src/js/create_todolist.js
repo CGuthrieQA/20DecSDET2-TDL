@@ -20,13 +20,13 @@ const postToDoList = (event) => {
                 console.error(`HTTP status code [${response.status}]`)
                 : 
                 response.json()
-                    .then( (data) => console.info(`successful [POST] response: ${JSON.stringify(data)}`) );    
+                    .then( (data) => getOneToDoList(data.id) );//console.info(`successful [POST] response: ${JSON.stringify(data)}`) );    
         })
         .catch( (err) => console.error(err) );
 
     document.querySelector("#input_todolist_name").value = "";
     
-    setTimeout( () => { getToDoLists() }, 100);
+    //setTimeout( () => { getToDoLists() }, 100);
 
 }
 
