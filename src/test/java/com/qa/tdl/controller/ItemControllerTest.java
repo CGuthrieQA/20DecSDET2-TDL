@@ -65,4 +65,15 @@ public class ItemControllerTest {
 		
 		verify(this.service, atLeastOnce()).readAll();
 	}
+	
+	@Test
+	void readByIdTest() throws Exception {
+		Long id = 2L;
+		ItemDto newDto = this.mapToDTO(testItem2);
+		
+		when(this.service.readById(id)).thenReturn(newDto);
+		assertEquals( ResponseEntity.ok(newDto) , this.controller.readById(id) );
+		
+		verify(this.service, atLeastOnce()).readById(id);
+	}
 }
