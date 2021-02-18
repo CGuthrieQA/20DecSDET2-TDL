@@ -69,4 +69,15 @@ public class ToDoListControllerTest {
 		verify(this.service, atLeastOnce()).readAll();
 	}
 	
+	@Test
+	void readByIdTest() throws Exception {
+		Long id = 2L;
+		ToDoListDto newDto = this.mapToDTO(testToDoList2);
+		
+		when(this.service.readById(id)).thenReturn(newDto);
+		assertEquals( ResponseEntity.ok(newDto) , this.controller.readById(id) );
+		
+		verify(this.service, atLeastOnce()).readById(id);
+	}
+	
 }
