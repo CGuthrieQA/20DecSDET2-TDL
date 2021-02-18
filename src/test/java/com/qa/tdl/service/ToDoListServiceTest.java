@@ -63,7 +63,6 @@ public class ToDoListServiceTest {
 		
 		verify(this.repo, atLeastOnce()).findAll();
 	}
-	
 
 	@Test
 	void readByIdTest() throws Exception {
@@ -74,5 +73,18 @@ public class ToDoListServiceTest {
 		assertEquals( newDto , (this.service.readById(id)) );
 		
 		verify(this.repo, atLeastOnce()).findById(id);
+	}
+	
+	@Test
+	void updateTest() throws Exception {
+		Long id = 3L;
+		ToDoListDto newDto = this.mapToDTO(testToDoList3);
+		
+		when(this.repo.findById(id)).thenReturn(Optional.of(testToDoList3));
+		when(this.repo.save(testToDoList3)).thenReturn(testToDoList3);
+		assertEquals( newDto , (this.service.update(newDto, id)) );
+		
+		verify(this.repo, atLeastOnce()).findById(id);
+		verify(this.repo, atLeastOnce()).save(testToDoList3);
 	}
 }
