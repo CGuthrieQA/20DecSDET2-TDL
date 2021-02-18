@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -53,5 +54,15 @@ public class ItemControllerTest {
 		assertEquals( new ResponseEntity<ItemDto>(newDto, HttpStatus.CREATED) , (this.controller.create(listId, newDto)) );
 		
 		verify(this.service, atLeastOnce()).create(newDto, listId);
+	}
+	
+	@Test
+	void readAllTest() throws Exception {
+		List<ItemDto> newDtoList = listOfItems.stream().map(this::mapToDTO).collect(Collectors.toList());
+		
+		when(this.service.readAll()).thenReturn(newDtoList);
+		assertEquals( ResponseEntity.ok(newDtoList) , this.controller.readAll() );
+		
+		verify(this.service, atLeastOnce()).readAll();
 	}
 }
