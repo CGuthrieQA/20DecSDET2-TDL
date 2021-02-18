@@ -38,10 +38,6 @@ public class ToDoListControllerTest {
 		return this.mapper.map(toDoList, ToDoListDto.class);
 	}
 	
-	private ToDoList mapFromDTO(ToDoListDto toDoListDto) {
-		return this.mapper.map(toDoListDto, ToDoList.class);
-	}
-	
 	private final ToDoList testToDoList1 = new ToDoList(1L, "Foo", false);
 	private final ToDoList testToDoList2 = new ToDoList(2L, "Bar", false);
 	private final ToDoList testToDoList3 = new ToDoList(3L, "Shopping", false);
@@ -91,4 +87,15 @@ public class ToDoListControllerTest {
 		verify(this.service, atLeastOnce()).update(newDto, id);
 	}
 	
+	@Test
+	void deleteTest() throws Exception {
+		Long id = 4L;
+		Long badId = -99999999L;
+		
+		when(this.service.delete(id)).thenReturn(true);
+		assertEquals(new ResponseEntity<>(null, HttpStatus.NO_CONTENT) , this.controller.delete(id) );
+		assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR) , this.controller.delete(badId) );
+		
+		verify(this.service, atLeastOnce()).delete(id);
+	}
 }
