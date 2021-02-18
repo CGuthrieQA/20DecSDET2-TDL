@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -50,9 +51,22 @@ public class ToDoListControllerTest {
 	
 	@Test
 	void createTest() throws Exception {
-		when(this.service.create(this.mapToDTO(testToDoList1))).thenReturn(this.mapToDTO(testToDoList1));
-		assertEquals(new ResponseEntity<ToDoListDto>(this.mapToDTO(testToDoList1), HttpStatus.CREATED),
-			(this.controller.create(this.mapToDTO(testToDoList1))));
-		verify(this.service, atLeastOnce()).create(this.mapToDTO(testToDoList1));
+		ToDoListDto newDto = this.mapToDTO(testToDoList1);
+		
+		when(this.service.create(newDto)).thenReturn(newDto);
+		assertEquals( new ResponseEntity<ToDoListDto>(newDto, HttpStatus.CREATED) , (this.controller.create(newDto)) );
+		
+		verify(this.service, atLeastOnce()).create(newDto);
 	}
+	
+	@Test
+	void readAllTest() throws Exception {
+		List<ToDoListDto> newDtoList = listOfToDoLists.stream().map(this::mapToDTO).collect(Collectors.toList());
+		
+		when(this.service.readAll()).thenReturn(newDtoList);
+		assertEquals( ResponseEntity.ok(newDtoList) , this.controller.readAll() );
+		
+		verify(this.service, atLeastOnce()).readAll();
+	}
+	
 }
