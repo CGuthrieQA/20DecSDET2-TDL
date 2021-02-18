@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -61,5 +62,17 @@ public class ToDoListServiceTest {
 		assertEquals( newDtoList , (this.service.readAll()) );
 		
 		verify(this.repo, atLeastOnce()).findAll();
+	}
+	
+
+	@Test
+	void readByIdTest() throws Exception {
+		Long id = 2L;
+		ToDoListDto newDto = this.mapToDTO(testToDoList2);
+		
+		when(this.repo.findById(id)).thenReturn(Optional.of(testToDoList2));
+		assertEquals( newDto , (this.service.readById(id)) );
+		
+		verify(this.repo, atLeastOnce()).findById(id);
 	}
 }
