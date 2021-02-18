@@ -87,4 +87,17 @@ public class ItemControllerTest {
 		
 		verify(this.service, atLeastOnce()).update(newDto, id);
 	}
+	
+	@Test
+	void deleteTest() throws Exception {
+		Long id = 4L;
+		Long badId = -99999999L;
+		
+		when(this.service.delete(id)).thenReturn(true);
+		assertEquals(new ResponseEntity<>(null, HttpStatus.NO_CONTENT) , this.controller.delete(id) );
+		assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR) , this.controller.delete(badId) );
+		
+		verify(this.service, atLeastOnce()).delete(id);
+	}
+	
 }
