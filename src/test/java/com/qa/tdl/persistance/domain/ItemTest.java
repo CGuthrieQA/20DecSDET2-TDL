@@ -1,6 +1,8 @@
 package com.qa.tdl.persistance.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,12 +21,18 @@ class ItemTest {
 	
 	@Test
 	void constructorOneTest() throws Exception {
-		assertEquals( smallItem , (new Item(name, complete)) );
+		Item result = new Item(name, complete);
+		assertNotNull(result); // if empty break
+		assertTrue(result instanceof Item); // if it is not a valid Item then fail
+		assertEquals( smallItem , result );
 	}
 	
 	@Test
 	void constructorTwoTest() throws Exception {
-		assertEquals( bigItem , (new Item(id, name, complete)) );
+		Item result = new Item(id, name, complete);
+		assertNotNull(result); // if empty break
+		assertTrue(result instanceof Item); // if it is not a valid Item then fail
+		assertEquals( bigItem , result );
 	}
 	
 }

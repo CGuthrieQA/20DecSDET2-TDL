@@ -1,6 +1,7 @@
 package com.qa.tdl.persistance.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,16 +21,25 @@ class ToDoListTest {
 	
 	@Test
 	void constuctorOneTest() throws Exception {
-		assertEquals( smallToDoList , (new ToDoList(id)) );
+		ToDoList result = new ToDoList(id);
+		assertTrue(result instanceof ToDoList); // if it is not a valid Item then fail
+		assertEquals( smallToDoList , result );
+		assertEquals( smallToDoList , result );
 	}
 	
 	@Test
 	void constuctorTwoTest() throws Exception {
-		assertEquals( mediumToDoList , (new ToDoList(name, complete)) );
+		ToDoList result = new ToDoList(name, complete);
+		assertTrue(result instanceof ToDoList); // if it is not a valid Item then fail
+		assertEquals( mediumToDoList , result );
+		assertEquals( mediumToDoList , result );
 	}
 	
 	@Test
 	void constuctorThreeTest() throws Exception {
-		assertEquals( bigToDoList , (new ToDoList(id, name, complete)) );
+		ToDoList result = new ToDoList(id, name, complete);
+		assertTrue(result instanceof ToDoList); // if it is not a valid Item then fail
+		assertEquals( bigToDoList , result );
+		assertEquals( bigToDoList , result );
 	}
 }
