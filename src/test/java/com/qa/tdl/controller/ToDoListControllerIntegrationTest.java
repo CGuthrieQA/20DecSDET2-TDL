@@ -142,4 +142,32 @@ class ToDoListControllerIntegrationTest {
 		.andExpect(contents);
 	}
 	
+	@Test
+	void readByIdTest() throws Exception {
+		
+		Long id = 1L;
+		
+		ToDoListDto testDto1 = this.mapToDTO(dataToDoList1);
+		testDto1.setItems(List.of(this.mapItemToDTO(dataItem1)));
+		
+		MockHttpServletRequestBuilder mockRequest = 
+				MockMvcRequestBuilders
+				.request(HttpMethod.GET, URI + "/read" + "/" + id)
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		ResultMatcher status = 
+				MockMvcResultMatchers
+				.status()
+				.isOk();
+		
+		ResultMatcher contents = 
+				MockMvcResultMatchers
+				.content()
+				.json(this.jsonifier.writeValueAsString(testDto1));
+		
+		mock.perform(mockRequest)
+		.andExpect(status)
+		.andExpect(contents);
+	}
+	
 }
