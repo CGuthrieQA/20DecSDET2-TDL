@@ -203,4 +203,23 @@ class ToDoListControllerIntegrationTest {
 		.andExpect(contents);
 	}
 	
+	@Test
+	void deleteTest() throws Exception {
+		
+		Long id = 4L;
+		
+		MockHttpServletRequestBuilder mockRequest = 
+				MockMvcRequestBuilders
+				.request(HttpMethod.DELETE, URI + "/delete" + "/" + id)
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		ResultMatcher status = 
+				MockMvcResultMatchers
+				.status()
+				.isNoContent();
+		
+		mock.perform(mockRequest)
+		.andExpect(status);
+	}
+	
 }
