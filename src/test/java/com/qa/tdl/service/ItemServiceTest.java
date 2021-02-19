@@ -80,4 +80,17 @@ public class ItemServiceTest {
 		verify(this.repo, atLeastOnce()).findById(id);
 	}
 	
+	@Test
+	void updateTest() throws Exception {
+		Long id = 3L;
+		ItemDto newDto = this.mapToDTO(testItem3);
+		
+		when(this.repo.findById(id)).thenReturn(Optional.of(testItem3));
+		when(this.repo.save(testItem3)).thenReturn(testItem3);
+		assertEquals( newDto , (this.service.update(newDto, id)) );
+		
+		verify(this.repo, atLeastOnce()).findById(id);
+		verify(this.repo, atLeastOnce()).save(testItem3);
+	}
+	
 }
