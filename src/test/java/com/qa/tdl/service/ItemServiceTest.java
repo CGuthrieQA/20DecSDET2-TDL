@@ -24,7 +24,7 @@ import com.qa.tdl.persistance.repo.ItemRepo;
 
 @SpringBootTest
 @ActiveProfiles("dev")
-public class ItemServiceTest {
+class ItemServiceTest {
 	
 	@Autowired
 	private ItemService service;

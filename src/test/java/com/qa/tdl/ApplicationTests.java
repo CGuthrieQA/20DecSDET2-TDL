@@ -11,7 +11,7 @@ class ApplicationTests {
 	}
 	
 	@Test
-	public void contextTest() {
+	void contextTest() {
 		Application.main( new String[] {} );
 	}
 

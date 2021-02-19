@@ -23,7 +23,7 @@ import com.qa.tdl.service.ItemService;
 
 @SpringBootTest
 @ActiveProfiles("dev")
-public class ItemControllerTest {
+class ItemControllerTest {
 	
 	@Autowired
 	private ItemController controller;
