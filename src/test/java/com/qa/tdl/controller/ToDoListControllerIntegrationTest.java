@@ -170,4 +170,37 @@ class ToDoListControllerIntegrationTest {
 		.andExpect(contents);
 	}
 	
+	@Test
+	void updateTest() throws Exception {
+		
+		Long id = 3L;
+		
+		ToDoListDto testDto3 = this.mapToDTO(dataToDoList3);
+		testDto3.setItems(List.of(this.mapItemToDTO(dataItem3)));
+		
+		ToDoListDto newTestDto3 = testDto3;
+		newTestDto3.setName("I am a test");
+		
+		MockHttpServletRequestBuilder mockRequest = 
+				MockMvcRequestBuilders
+				.request(HttpMethod.PUT, URI + "/update" + "/" + id)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(this.jsonifier.writeValueAsString(newTestDto3))
+				.accept(MediaType.APPLICATION_JSON);
+		
+		ResultMatcher status = 
+				MockMvcResultMatchers
+				.status()
+				.isAccepted();
+		
+		ResultMatcher contents = 
+				MockMvcResultMatchers
+				.content()
+				.json(this.jsonifier.writeValueAsString(newTestDto3));
+		
+		mock.perform(mockRequest)
+		.andExpect(status)
+		.andExpect(contents);
+	}
+	
 }
