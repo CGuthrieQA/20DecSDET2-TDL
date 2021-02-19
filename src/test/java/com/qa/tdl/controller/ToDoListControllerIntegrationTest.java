@@ -19,7 +19,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qa.tdl.dto.ItemDto;
 import com.qa.tdl.dto.ToDoListDto;
+import com.qa.tdl.persistance.domain.Item;
 import com.qa.tdl.persistance.domain.ToDoList;
 
 @SpringBootTest
@@ -41,6 +43,10 @@ class ToDoListControllerIntegrationTest {
 	private ToDoListDto mapToDTO(ToDoList toDoList) {
 		return this.mapper.map(toDoList, ToDoListDto.class);
 	}
+	// map item to DTO
+	private ItemDto mapItemToDTO(Item item) {
+		return this.mapper.map(item, ItemDto.class);
+	}
 	
 	private final String URI = "/todolist";
 	
@@ -52,7 +58,14 @@ class ToDoListControllerIntegrationTest {
 	private final ToDoList dataToDoList3 = new ToDoList(3L, "Lorem", false);
 	private final ToDoList dataToDoList4 = new ToDoList(4L, "Ipsum", false);
 	
-	private final List<ToDoList> listOfToDoLists = List.of(dataToDoList1, dataToDoList2, dataToDoList3, dataToDoList4, testToDoList1);
+	// items from data.sql
+	private final Item dataItem1 = new Item(1L, "Foo", false);
+	private final Item dataItem2 = new Item(2L, "Bar", false);
+	private final Item dataItem3 = new Item(3L, "Lorem", false);
+	private final Item dataItem4 = new Item(4L, "Ipsum", false);
+	
+	
+//	private final List<ToDoList> listOfToDoLists = List.of(dataToDoList1, dataToDoList2, dataToDoList3, dataToDoList4);
 	
 	@Test
 	void createTest() throws Exception {
@@ -81,6 +94,49 @@ class ToDoListControllerIntegrationTest {
 				.json(this.jsonifier.writeValueAsString(testDto));
 
 		// ACTION (build request)
+		mock.perform(mockRequest)
+		.andExpect(status)
+		.andExpect(contents);
+	}
+	
+	@Test
+	void readAllTest() throws Exception {
+//		List<ToDoListDto> testDtoList = 
+//				listOfToDoLists.stream()
+//				.map(this::mapToDTO)
+//				.collect(Collectors.toList());
+		
+		ToDoListDto testDto1 = this.mapToDTO(dataToDoList1);
+		testDto1.setItems(List.of(this.mapItemToDTO(dataItem1)));
+		
+		ToDoListDto testDto2 = this.mapToDTO(dataToDoList2);
+		testDto2.setItems(List.of(this.mapItemToDTO(dataItem2)));
+		
+		ToDoListDto testDto3 = this.mapToDTO(dataToDoList3);
+		testDto3.setItems(List.of(this.mapItemToDTO(dataItem3)));
+		
+		ToDoListDto testDto4 = this.mapToDTO(dataToDoList4);
+		testDto4.setItems(List.of(this.mapItemToDTO(dataItem4)));
+		
+		List<ToDoListDto> testDtoList = List.of(testDto1, testDto2, testDto3, testDto4);
+		
+		MockHttpServletRequestBuilder mockRequest = 
+				MockMvcRequestBuilders
+				.request(HttpMethod.GET, URI + "/read")
+				.contentType(MediaType.APPLICATION_JSON);
+				//.content(this.jsonifier.writeValueAsString(testToDoList1))
+				//.accept(MediaType.APPLICATION_JSON);
+		
+		ResultMatcher status = 
+				MockMvcResultMatchers
+				.status()
+				.isOk(); // this needs to match HTTP status
+		
+		ResultMatcher contents = 
+				MockMvcResultMatchers
+				.content()
+				.json(this.jsonifier.writeValueAsString(testDtoList));
+		
 		mock.perform(mockRequest)
 		.andExpect(status)
 		.andExpect(contents);
