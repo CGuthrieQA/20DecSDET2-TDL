@@ -1,5 +1,8 @@
 package com.qa.tdl.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +50,8 @@ class ItemControllerIntegrationTest {
 	private final Item dataItem3 = new Item(3L, "Lorem", false);
 	private final Item dataItem4 = new Item(4L, "Ipsum", false);
 	
+	List<Item> listItems = List.of(dataItem1, dataItem2, dataItem3, dataItem4);
+	
 	@Test
 	void createTest() throws Exception {
 		
@@ -54,7 +59,6 @@ class ItemControllerIntegrationTest {
 		Item testItem = new Item("Foo", false);
 		ItemDto testDto = this.mapToDTO(testItem);
 		testDto.setId(5L);
-		
 		
 		MockHttpServletRequestBuilder mockRequest = 
 				MockMvcRequestBuilders
@@ -73,6 +77,34 @@ class ItemControllerIntegrationTest {
 				MockMvcResultMatchers
 				.content()
 				.json(this.jsonifier.writeValueAsString(testDto));
+		
+		mock.perform(mockRequest)
+		.andExpect(status)
+		.andExpect(contents);
+	}
+	
+	@Test
+	void readAllTest() throws Exception {
+		
+		List<ItemDto> testDtoList = 
+				listItems.stream()
+				.map(this::mapToDTO)
+				.collect(Collectors.toList());
+		
+		MockHttpServletRequestBuilder mockRequest = 
+				MockMvcRequestBuilders
+				.request(HttpMethod.GET, URI + "/read")
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		ResultMatcher status = 
+				MockMvcResultMatchers
+				.status()
+				.isOk();
+		
+		ResultMatcher contents = 
+				MockMvcResultMatchers
+				.content()
+				.json(this.jsonifier.writeValueAsString(testDtoList));
 		
 		mock.perform(mockRequest)
 		.andExpect(status)
