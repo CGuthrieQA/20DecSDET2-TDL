@@ -110,4 +110,31 @@ class ItemControllerIntegrationTest {
 		.andExpect(status)
 		.andExpect(contents);
 	}
+	
+	@Test
+	void readByIdTest() throws Exception {
+		
+		Long id = 1L;
+		
+		ItemDto testDto = this.mapToDTO(dataItem1);
+		
+		MockHttpServletRequestBuilder mockRequest = 
+				MockMvcRequestBuilders
+				.request(HttpMethod.GET, URI + "/read" + "/" + id)
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		ResultMatcher status = 
+				MockMvcResultMatchers
+				.status()
+				.isOk();
+		
+		ResultMatcher contents = 
+				MockMvcResultMatchers
+				.content()
+				.json(this.jsonifier.writeValueAsString(testDto));
+		
+		mock.perform(mockRequest)
+		.andExpect(status)
+		.andExpect(contents);
+	}
 }
