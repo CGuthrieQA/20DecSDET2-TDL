@@ -13,7 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("dev")
 public class AppUtilTest {
 	
-	// this is using reflection, found on laurenthinoul.com "how to test a private constructor"
+	// this is using reflection, found on LaurentHinoul.com "how to test a private constructor"
 	@Test
 	void constructorTest() throws Exception {
 		Constructor<AppUtil> privateConstructor = AppUtil.class.getDeclaredConstructor();
