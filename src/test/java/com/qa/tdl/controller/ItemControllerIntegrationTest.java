@@ -137,4 +137,35 @@ class ItemControllerIntegrationTest {
 		.andExpect(status)
 		.andExpect(contents);
 	}
+	
+	@Test
+	void updateTest() throws Exception {
+		
+		Long id = 4L;
+
+		ItemDto testDto = this.mapToDTO(dataItem4);
+		ItemDto newTestDto = testDto;
+		newTestDto.setName("I have a new name");
+		
+		MockHttpServletRequestBuilder mockRequest = 
+				MockMvcRequestBuilders
+				.request(HttpMethod.PUT, URI + "/update" + "/" + id)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(this.jsonifier.writeValueAsString(newTestDto))
+				.accept(MediaType.APPLICATION_JSON);
+		
+		ResultMatcher status = 
+				MockMvcResultMatchers
+				.status()
+				.isAccepted();
+		
+		ResultMatcher contents = 
+				MockMvcResultMatchers
+				.content()
+				.json(this.jsonifier.writeValueAsString(newTestDto));
+		
+		mock.perform(mockRequest)
+		.andExpect(status)
+		.andExpect(contents);
+	}
 }
