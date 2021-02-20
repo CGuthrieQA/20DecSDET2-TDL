@@ -23,7 +23,7 @@ import com.qa.tdl.pom.pages.PortalPage;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class PortalPageAcceptanceTest {
+class PortalPageAcceptanceTest {
 	
 	// web driver init
 	@Autowired
@@ -41,7 +41,7 @@ public class PortalPageAcceptanceTest {
     // CREATE to-do list / READ to-do list
     @Test
     @Order(1)
-    public void createToDoListTest() {
+    void createToDoListTest() {
     	// GIVEN - that I can navigate to the website
     	driver.get("http://127.0.0.1:9090/");
     	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
@@ -64,7 +64,7 @@ public class PortalPageAcceptanceTest {
     // UPDATE-CANCEL to-do list
     @Test
     @Order(2)
-    public void updateToDoListCancelTest() {
+    void updateToDoListCancelTest() {
     	// GIVEN - that I can navigate to the website
     	driver.get("http://127.0.0.1:9090/");
     	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
@@ -127,7 +127,7 @@ public class PortalPageAcceptanceTest {
     // UPDATE to-do list
     @Test
     @Order(3)
-    public void updateToDoListTest() {
+    void updateToDoListTest() {
     	// GIVEN - that I can navigate to the website
     	driver.get("http://127.0.0.1:9090/");
     	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
@@ -156,7 +156,7 @@ public class PortalPageAcceptanceTest {
     // CREATE item / READ item
     @Test
     @Order(4)
-    public void createItemTest() {
+    void createItemTest() {
     	// GIVEN - that I can navigate to the website
     	driver.get("http://127.0.0.1:9090/");
     	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
@@ -182,7 +182,7 @@ public class PortalPageAcceptanceTest {
     // UPDATE item
     @Test
     @Order(6)
-    public void updateItemTest() {
+    void updateItemTest() {
     	// GIVEN - that I can navigate to the website
     	driver.get("http://127.0.0.1:9090/");
     	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
@@ -213,7 +213,7 @@ public class PortalPageAcceptanceTest {
     // UPDATE-Cancel item
     @Test
     @Order(5)
-    public void updateItemCancelTest() {
+    void updateItemCancelTest() {
     	// GIVEN - that I can navigate to the website
     	driver.get("http://127.0.0.1:9090/");
     	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
@@ -279,7 +279,7 @@ public class PortalPageAcceptanceTest {
     // DELETE item
     @Test
     @Order(7)
-    public void deleteItemTest() {
+    void deleteItemTest() {
     	// GIVEN - that I can navigate to the website
     	driver.get("http://127.0.0.1:9090/");
     	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
@@ -301,7 +301,7 @@ public class PortalPageAcceptanceTest {
     // DELETE to-do list
     @Test
     @Order(8)
-    public void deleteToDoListTest() {
+    void deleteToDoListTest() {
     	// GIVEN - that I can navigate to the website
     	driver.get("http://127.0.0.1:9090/");
     	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
