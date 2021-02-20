@@ -278,7 +278,6 @@ public class PortalPageAcceptanceTest {
     @Test
     @Order(7)
     public void deleteItemTest() {
-
     	// GIVEN - that I can navigate to the website
     	driver.get("http://127.0.0.1:9090/");
     	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
@@ -293,6 +292,32 @@ public class PortalPageAcceptanceTest {
     	// THEN - the item is deleted
     	boolean result = website.deleteItemCheck();
     	boolean expected = true;
+    	assertEquals(expected, result);
+    }
+    
+    // DELETE to-do list
+    @Test
+    @Order(8)
+    public void deleteToDoListTest() {
+    	// GIVEN - that I can navigate to the website
+    	driver.get("http://127.0.0.1:9090/");
+    	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
+    	
+    	// WHEN - I hit the delete to do list button
+    	website.deleteToDoListSubmit();
+    	
+    	// THEN - the item is deleted
+    	driver.navigate().refresh();
+    	
+    	boolean result;
+    	try {
+    		driver.findElement(By.xpath("//*[@id=\"todolist-name-1\"]"));
+    		result = true;
+    	} catch (NoSuchElementException e) {
+    		result = false;
+    	}
+    	boolean expected = false;
+    	
     	assertEquals(expected, result);
     }
     
