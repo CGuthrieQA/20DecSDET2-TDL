@@ -80,6 +80,7 @@ public class PortalPageAcceptanceTest {
     	
     	// AND - I cancel the update
     	website.updateToDoListCancel();
+    	website.waitToDoListRead(driver);
     	
     	// THEN - the update input, submit and cancel buttons are replaced by the regular name
     	
@@ -126,6 +127,31 @@ public class PortalPageAcceptanceTest {
     	assertNotNull(result4);
     	assertEquals(expected4, result4);
     	
+    }
+    
+    @Test
+    public void updateToDoListTest() {
+    	// GIVEN - that I can navigate to the website
+    	driver.get("http://127.0.0.1:9090/");
+    	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
+    	
+    	// WHEN - I hit the update button
+    	website.updateToDoListButton();
+    	website.waitToDoListUpdate(driver);
+    	
+    	// AND - I enter a new name into the input
+    	website.updateToDoListType();
+    	
+    	// AND - I submit the new name
+    	website.updateToDoListSubmit();
+    	website.waitToDoListRead(driver);
+    	
+    	// THEN - the name is updated
+    	String result = website.getToDoListName();
+    	String expected = "Bar";
+    	
+    	assertNotNull(result);
+    	assertEquals(expected, result);
     }
     
     // tear down
