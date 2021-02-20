@@ -22,7 +22,7 @@ import com.qa.tdl.persistance.repo.ToDoListRepo;
 
 @SpringBootTest
 @ActiveProfiles("dev")
-class ToDoListServiceTest {
+class ToDoListServiceUnitTest {
 
 	@Autowired
 	private ToDoListService service;

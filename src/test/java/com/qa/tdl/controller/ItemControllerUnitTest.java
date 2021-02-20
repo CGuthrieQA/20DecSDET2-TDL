@@ -1,4 +1,4 @@
-package com.qa.tdl.service;
+package com.qa.tdl.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.atLeastOnce;
@@ -6,7 +6,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -14,23 +13,23 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.qa.tdl.dto.ItemDto;
 import com.qa.tdl.persistance.domain.Item;
-import com.qa.tdl.persistance.domain.ToDoList;
-import com.qa.tdl.persistance.repo.ItemRepo;
-
+import com.qa.tdl.service.ItemService;
 
 @SpringBootTest
 @ActiveProfiles("dev")
-class ItemServiceTest {
+class ItemControllerUnitTest {
 	
 	@Autowired
-	private ItemService service;
+	private ItemController controller;
 	
 	@MockBean
-	private ItemRepo repo;
+	private ItemService service;
 	
 	@Autowired
 	private ModelMapper mapper;
@@ -48,25 +47,23 @@ class ItemServiceTest {
 	
 	@Test
 	void createTest() throws Exception {
-		Long listId = 1L;
-		testItem1.setToDoList(new ToDoList(listId));
 		ItemDto newDto = this.mapToDTO(testItem1);
+		Long listId = 1L;
 		
-		when(this.repo.save(testItem1)).thenReturn(testItem1);
+		when(this.service.create(newDto, listId)).thenReturn(newDto);
+		assertEquals( new ResponseEntity<ItemDto>(newDto, HttpStatus.CREATED) , (this.controller.create(listId, newDto)) );
 		
-		assertEquals( newDto , (this.service.create(newDto, listId)) );
-		
-		verify(this.repo, atLeastOnce()).save(testItem1);
+		verify(this.service, atLeastOnce()).create(newDto, listId);
 	}
 	
 	@Test
 	void readAllTest() throws Exception {
 		List<ItemDto> newDtoList = listOfItems.stream().map(this::mapToDTO).collect(Collectors.toList());
 		
-		when(this.repo.findAll()).thenReturn(listOfItems);
-		assertEquals( newDtoList , (this.service.readAll()) );
+		when(this.service.readAll()).thenReturn(newDtoList);
+		assertEquals( ResponseEntity.ok(newDtoList) , this.controller.readAll() );
 		
-		verify(this.repo, atLeastOnce()).findAll();
+		verify(this.service, atLeastOnce()).readAll();
 	}
 	
 	@Test
@@ -74,10 +71,10 @@ class ItemServiceTest {
 		Long id = 2L;
 		ItemDto newDto = this.mapToDTO(testItem2);
 		
-		when(this.repo.findById(id)).thenReturn(Optional.of(testItem2));
-		assertEquals( newDto , (this.service.readById(id)) );
+		when(this.service.readById(id)).thenReturn(newDto);
+		assertEquals( ResponseEntity.ok(newDto) , this.controller.readById(id) );
 		
-		verify(this.repo, atLeastOnce()).findById(id);
+		verify(this.service, atLeastOnce()).readById(id);
 	}
 	
 	@Test
@@ -85,25 +82,22 @@ class ItemServiceTest {
 		Long id = 3L;
 		ItemDto newDto = this.mapToDTO(testItem3);
 		
-		when(this.repo.findById(id)).thenReturn(Optional.of(testItem3));
-		when(this.repo.save(testItem3)).thenReturn(testItem3);
-		assertEquals( newDto , (this.service.update(newDto, id)) );
+		when(this.service.update(newDto, id)).thenReturn(newDto);
+		assertEquals(new ResponseEntity<ItemDto>(newDto, HttpStatus.ACCEPTED) , this.controller.update(id, newDto) );
 		
-		verify(this.repo, atLeastOnce()).findById(id);
-		verify(this.repo, atLeastOnce()).save(testItem3);
+		verify(this.service, atLeastOnce()).update(newDto, id);
 	}
 	
 	@Test
 	void deleteTest() throws Exception {
 		Long id = 4L;
-		Long badId = -99999L;
+		Long badId = -99999999L;
 		
-		when(this.repo.existsById(id)).thenReturn(false);
-		when(this.repo.existsById(badId)).thenReturn(true);
-		assertEquals( true , (this.service.delete(id)) );
-		assertEquals( false , (this.service.delete(badId)) );
+		when(this.service.delete(id)).thenReturn(true);
+		assertEquals(new ResponseEntity<>(null, HttpStatus.NO_CONTENT) , this.controller.delete(id) );
+		assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR) , this.controller.delete(badId) );
 		
-		verify(this.repo, atLeastOnce()).existsById(id);
+		verify(this.service, atLeastOnce()).delete(id);
 	}
 	
 }

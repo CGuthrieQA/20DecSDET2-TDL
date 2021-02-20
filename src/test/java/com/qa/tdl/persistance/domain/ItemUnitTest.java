@@ -10,7 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("dev")
-class ItemTest {
+class ItemUnitTest {
 	
 	private Long id = 1L;
 	private String name = "test name";

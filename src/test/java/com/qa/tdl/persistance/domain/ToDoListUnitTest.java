@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("dev")
-class ToDoListTest {
+class ToDoListUnitTest {
 	
 	private Long id = 1L;
 	private String name = "test name";

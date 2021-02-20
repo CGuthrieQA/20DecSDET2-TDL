@@ -23,7 +23,7 @@ import com.qa.tdl.service.ToDoListService;
 
 @SpringBootTest
 @ActiveProfiles("dev")
-class ToDoListControllerTest {
+class ToDoListControllerUnitTest {
 	
 	@Autowired
 	private ToDoListController controller;
