@@ -117,12 +117,6 @@ public class PortalPage {
 	}
 	
 	// TOGGLE BUTTON
-	public void waitToggle(WebDriver driver) {
-		WebElement waitToggleElement = (new WebDriverWait(driver, 300))
-						.until(ExpectedConditions
-						.presenceOfElementLocated(By.id("item-create-input-1")));
-	}
-	
 	public void toggleItemsButton() {
 		toggleDropDownButton.click();
 	}
@@ -138,29 +132,35 @@ public class PortalPage {
 	}
 	
 	// READ
-
 	public void waitItemRead(WebDriver driver) {
 		WebElement waitItemReadElement = (new WebDriverWait(driver, 300))
 						.until(ExpectedConditions
-						.presenceOfElementLocated(By.id("item-name-1")));
+						.elementToBeClickable(By.id("item-delete-1")));//item-name-1")));
 	}
 	public String getItemName() {
 		return itemName.getText().strip();
 	}
 	
 	// UPDATE
-	public void updateItem() {
+	public void waitItemUpdate(WebDriver driver) {
+	WebElement waitItemUpdateElement = (new WebDriverWait(driver, 300))
+			.until(ExpectedConditions
+			.presenceOfElementLocated(By.id("update-item-input-1")));
+	}
+	public void updateItemButton() {
 		updateItemButton.click();
+	}
+	public void updateItemType() {
 		updateItemInput.sendKeys("Ipsum");
+	}
+	public void updateItemSubmit() {
 		updateItemSubmit.click();
 	}
-	
 	public void updateItemCancel() {
-		updateItemButton.click();
 		updateItemCancel.click();
 	}
 	
-	// DELETE// DELETE
+	// DELETE
 	public void deleteItem() {
 		deleteItemSubmit.click();
 	}
