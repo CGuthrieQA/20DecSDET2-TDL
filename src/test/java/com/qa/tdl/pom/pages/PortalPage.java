@@ -170,6 +170,6 @@ public class PortalPage {
 	
 	// CHECK HIDDEN
 	public boolean deleteItemCheck() {
-		return justItem.isDisplayed();
+		return !justItem.isDisplayed();
 	}
 }
