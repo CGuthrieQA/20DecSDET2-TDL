@@ -169,4 +169,65 @@ public class PortalPage {
 		+ "button") // button
 	private WebElement updateItemCancel;
 	
+	// METHODS
+	
+	// To-Do List
+	
+	// CREATE
+	public void createToDoList() {
+		createToDoListInput.sendKeys("Foo");
+		createToDoListSubmit.click();
+	}
+	
+	// READ
+	public void getToDoListName() {
+		toDoListName.getText();
+	}
+	
+	// UPDATE
+	public void updateToDoList() {
+		updateToDoListButton.click();
+		updateToDoListInput.sendKeys("Bar");
+		updateToDoListSubmit.click();
+	}
+	
+	public void updateToDoListCancel() {
+		updateToDoListButton.click();
+		updateToDoListCancel.click();
+	}
+	
+	// DELETE
+	public void deleteToDoList() {
+		deleteToDoListSubmit.click();
+	}
+	
+	// Item
+	
+	// CREATE
+	public void createItem() {
+		createItemInput.sendKeys("Lorem");
+		createToDoListSubmit.click();
+	}
+	
+	// READ
+	public void getItemName() {
+		itemName.getText();
+	}
+	
+	// UPDATE
+	public void updateItem() {
+		updateItemButton.click();
+		updateItemInput.sendKeys("Ipsum");
+		updateItemSubmit.click();
+	}
+	
+	public void updateItemCancel() {
+		updateItemButton.click();
+		updateItemCancel.click();
+	}
+	
+	// DELETE// DELETE
+	public void deleteItem() {
+		deleteItemSubmit.click();
+	}
 }
