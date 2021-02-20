@@ -1,44 +1,54 @@
 package com.qa.tdl.pom.test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.tdl.pom.pages.PortalPage;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class PortalPageAcceptanceTest {
 	
-	// extent init
-	private static ExtentReports report;
-	private static ExtentTest test;
-	
 	// web driver init
-    private static RemoteWebDriver driver;
+	@Autowired
+    private static WebDriver driver;
     
     // setup
     @BeforeAll
     public static void setup() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();//chromeCfg());
-        
-        // extent
-        report = new ExtentReports("target/extent_report.html", true);
-        
-    	driver.get("https://127.0.0.1:9090/");
-    	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
+        driver = new ChromeDriver();
+       
     }
     
     // TESTS IN HERE
-    
-    // extent ending after each
-    @AfterEach
-    public void afterTests(){
-    	report.endTest(test);
+    @Test
+    public void createToDoListTest() {
+    	// GIVEN - that I can navigate to the website
+    	driver.get("http://127.0.0.1:9090/");
+    	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
+    	System.out.println("Found the website");
+    	
+    	// WHEN - I create a to do list
+    	website.createToDoList();
+    	System.out.println("Created a To-Do list");
+    	
+    	// THEN - it exists in the database? and reads it from the database onto the page
+    	website.waitToDoListRead(driver);
+    	String result = website.getToDoListName();
+    	String expected = "Foo";
+    	assertNotNull(result);
+    	System.out.println("Created To-Do list exists");
+    	assertEquals(result, expected);
+    	System.out.println("Created To-Do list has the expected value");
     }
     
     // tear down
@@ -46,10 +56,5 @@ public class PortalPageAcceptanceTest {
     public static void tearDown() {
         driver.quit();
         System.out.println("driver closed");
-        
-        report.endTest(test);
-        report.flush();
-        report.close();
-        System.out.println("extent closed");
     }
 }
