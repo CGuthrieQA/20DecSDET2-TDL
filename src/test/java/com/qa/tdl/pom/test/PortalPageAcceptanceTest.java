@@ -180,7 +180,7 @@ public class PortalPageAcceptanceTest {
     // UPDATE item
     @Test
     @Order(6)
-    public void updateItemTest() throws InterruptedException {
+    public void updateItemTest() {
     	// GIVEN - that I can navigate to the website
     	driver.get("http://127.0.0.1:9090/");
     	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
@@ -208,6 +208,7 @@ public class PortalPageAcceptanceTest {
     	assertEquals(expected, result);
     }
     
+    // UPDATE-Cancel item
     @Test
     @Order(5)
     public void updateItemCancelTest() {
@@ -271,6 +272,28 @@ public class PortalPageAcceptanceTest {
     	
     	assertNotNull(result4);
     	assertEquals(expected4, result4);
+    }
+    
+    // DELETE item
+    @Test
+    @Order(7)
+    public void deleteItemTest() {
+
+    	// GIVEN - that I can navigate to the website
+    	driver.get("http://127.0.0.1:9090/");
+    	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
+    	
+    	// WHEN - I hit the toggle item button
+    	website.toggleItemsButton();
+    	website.waitItemRead(driver);
+    	
+    	// AND - the item update button is clicked
+    	website.deleteItemSubmit();
+    	
+    	// THEN - the item is deleted
+    	boolean result = website.deleteItemCheck();
+    	boolean expected = true;
+    	assertEquals(expected, result);
     }
     
     // tear down

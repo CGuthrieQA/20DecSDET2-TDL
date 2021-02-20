@@ -60,6 +60,9 @@ public class PortalPage {
 	@FindBy(xpath = "//*[@id=\"update-item-form-1\"]/div/div[3]/button")
 	private WebElement updateItemCancel;
 	
+	@FindBy(xpath = "//*[@id=\"item-id-1\"]")
+	private WebElement justItem;
+	
 	// CONSTRUCTOR
 	
 	public PortalPage() {
@@ -161,7 +164,12 @@ public class PortalPage {
 	}
 	
 	// DELETE
-	public void deleteItem() {
+	public void deleteItemSubmit() {
 		deleteItemSubmit.click();
+	}
+	
+	// CHECK HIDDEN
+	public boolean deleteItemCheck() {
+		return justItem.isDisplayed();
 	}
 }
