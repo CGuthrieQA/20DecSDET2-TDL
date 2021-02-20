@@ -51,6 +51,24 @@ public class PortalPageAcceptanceTest {
     	System.out.println("Created To-Do list has the expected value");
     }
     
+    @Test
+    public void readToDoListTest() {
+    	// GIVEN - that I can navigate to the website
+    	driver.get("http://127.0.0.1:9090/");
+    	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
+    	System.out.println("Found the website");
+    	
+    	// WHEN - the website loads it gets a list of to-do lists from the database 
+    	
+    	// THEN - I can see the to-do lists on the page
+    	String result = website.getToDoListName();
+    	String expected = "Foo";
+    	assertNotNull(result);
+    	System.out.println("Read To-Do list exists");
+    	assertEquals(result, expected);
+    	System.out.println("Read To-Do list has the expected value");
+    }
+    
     // tear down
     @AfterAll
     public static void tearDown() {
