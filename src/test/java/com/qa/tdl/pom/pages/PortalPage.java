@@ -72,8 +72,11 @@ public class PortalPage {
 	// To-Do List
 	
 	// CREATE
-	public void createToDoList() {
+	public void createToDoListType() {
 		createToDoListInput.sendKeys("Foo");
+	}
+	
+	public void createToDoListSubmit() {
 		createToDoListSubmit.click();
 	}
 
@@ -83,24 +86,36 @@ public class PortalPage {
 						.until(ExpectedConditions
 						.presenceOfElementLocated(By.id("todolist-name-1")));
 	}
+	
 	public String getToDoListName() {
 		return toDoListName.getText();
 	}
 	
 	// UPDATE
-	public void updateToDoList() {
-		updateToDoListButton.click();
-		updateToDoListInput.sendKeys("Bar");
-		updateToDoListSubmit.click();
+	public void waitToDoListUpdate(WebDriver driver) {
+		WebElement waitToDoListUpdateElement = (new WebDriverWait(driver, 300))
+						.until(ExpectedConditions
+						.presenceOfElementLocated(By.id("update-todolist-input-1")));
 	}
 	
-	public void updateToDoListCancel() {
+	public void updateToDoListButton() {
 		updateToDoListButton.click();
+	}
+	public void updateToDoListType() {
+		updateToDoListInput.sendKeys("Bar");
+	}
+	public void updateToDoListSubmit() {
+		updateToDoListSubmit.click();
+	}
+	public void updateToDoList() {
+		
+	}
+	public void updateToDoListCancel() {
 		updateToDoListCancel.click();
 	}
 	
 	// DELETE
-	public void deleteToDoList() {
+	public void deleteToDoListSubmit() {
 		deleteToDoListSubmit.click();
 	}
 	
