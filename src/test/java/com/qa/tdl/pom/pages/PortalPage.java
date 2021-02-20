@@ -107,9 +107,6 @@ public class PortalPage {
 	public void updateToDoListSubmit() {
 		updateToDoListSubmit.click();
 	}
-	public void updateToDoList() {
-		
-	}
 	public void updateToDoListCancel() {
 		updateToDoListCancel.click();
 	}
@@ -119,15 +116,34 @@ public class PortalPage {
 		deleteToDoListSubmit.click();
 	}
 	
+	// TOGGLE BUTTON
+	public void waitToggle(WebDriver driver) {
+		WebElement waitToggleElement = (new WebDriverWait(driver, 300))
+						.until(ExpectedConditions
+						.presenceOfElementLocated(By.id("item-create-input-1")));
+	}
+	
+	public void toggleItemsButton() {
+		toggleDropDownButton.click();
+	}
+	
 	// Item
 	
 	// CREATE
-	public void createItem() {
+	public void createItemType() {
 		createItemInput.sendKeys("Lorem");
-		createToDoListSubmit.click();
+	}
+	public void createItemSubmit() {
+		createItemSubmit.click();
 	}
 	
 	// READ
+
+	public void waitItemRead(WebDriver driver) {
+		WebElement waitItemReadElement = (new WebDriverWait(driver, 300))
+						.until(ExpectedConditions
+						.presenceOfElementLocated(By.id("item-name-1")));
+	}
 	public String getItemName() {
 		return itemName.getText().strip();
 	}

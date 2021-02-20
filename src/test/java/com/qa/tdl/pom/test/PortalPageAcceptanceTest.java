@@ -31,6 +31,8 @@ public class PortalPageAcceptanceTest {
     }
     
     // TESTS IN HERE
+    
+    // CREATE to-do list
     @Test
     public void createToDoListTest() {
     	// GIVEN - that I can navigate to the website
@@ -52,6 +54,7 @@ public class PortalPageAcceptanceTest {
     	assertEquals(expected, result);
     }
     
+    // READ to-do list
     @Test
     public void readToDoListTest() {
     	// GIVEN - that I can navigate to the website
@@ -68,6 +71,7 @@ public class PortalPageAcceptanceTest {
     	assertEquals(expected, result);
     }
     
+    // UPDATE-CANCEL to-do list
     @Test
     public void updateToDoListCancelTest() {
     	// GIVEN - that I can navigate to the website
@@ -129,6 +133,7 @@ public class PortalPageAcceptanceTest {
     	
     }
     
+    // UPDATE to-do list
     @Test
     public void updateToDoListTest() {
     	// GIVEN - that I can navigate to the website
@@ -149,6 +154,34 @@ public class PortalPageAcceptanceTest {
     	// THEN - the name is updated
     	String result = website.getToDoListName();
     	String expected = "Bar";
+    	
+    	assertNotNull(result);
+    	assertEquals(expected, result);
+    }
+    
+    // will do delete test last
+    
+    // CREATE item
+    @Test
+    public void createItemTest() {
+    	// GIVEN - that I can navigate to the website
+    	driver.get("http://127.0.0.1:9090/");
+    	PortalPage website = PageFactory.initElements(driver, PortalPage.class);
+    	
+    	// WHEN - I hit the item toggle button
+    	website.toggleItemsButton();
+    	website.waitToggle(driver);
+    	
+    	// AND - I enter an item into the input
+    	website.createItemType();
+    	
+    	// AND - I hit the submit button
+    	website.createItemSubmit();
+    	website.waitItemRead(driver);
+    	
+    	// THEN - the item is created
+    	String result = website.getItemName();
+    	String expected = "Lorem";
     	
     	assertNotNull(result);
     	assertEquals(expected, result);
