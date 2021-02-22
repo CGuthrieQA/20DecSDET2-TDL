@@ -14,7 +14,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
 
 import com.qa.tdl.dto.ItemDto;
 import com.qa.tdl.persistance.domain.Item;
@@ -23,7 +22,6 @@ import com.qa.tdl.persistance.repo.ItemRepo;
 
 
 @SpringBootTest
-@ActiveProfiles("dev")
 class ItemServiceUnitTest {
 	
 	@Autowired

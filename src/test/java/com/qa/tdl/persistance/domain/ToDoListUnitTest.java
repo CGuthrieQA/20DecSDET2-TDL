@@ -5,10 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
-@ActiveProfiles("dev")
 class ToDoListUnitTest {
 	
 	private Long id = 1L;
@@ -24,7 +22,6 @@ class ToDoListUnitTest {
 		ToDoList result = new ToDoList(id);
 		assertTrue(result instanceof ToDoList); // if it is not a valid Item then fail
 		assertEquals( smallToDoList , result );
-		assertEquals( smallToDoList , result );
 	}
 	
 	@Test
@@ -32,14 +29,12 @@ class ToDoListUnitTest {
 		ToDoList result = new ToDoList(name, complete);
 		assertTrue(result instanceof ToDoList); // if it is not a valid Item then fail
 		assertEquals( mediumToDoList , result );
-		assertEquals( mediumToDoList , result );
 	}
 	
 	@Test
 	void constuctorThreeTest() throws Exception {
 		ToDoList result = new ToDoList(id, name, complete);
 		assertTrue(result instanceof ToDoList); // if it is not a valid Item then fail
-		assertEquals( bigToDoList , result );
 		assertEquals( bigToDoList , result );
 	}
 }

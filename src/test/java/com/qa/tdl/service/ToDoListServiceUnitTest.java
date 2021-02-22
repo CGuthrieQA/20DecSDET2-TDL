@@ -14,14 +14,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
 
 import com.qa.tdl.dto.ToDoListDto;
 import com.qa.tdl.persistance.domain.ToDoList;
 import com.qa.tdl.persistance.repo.ToDoListRepo;
 
 @SpringBootTest
-@ActiveProfiles("dev")
 class ToDoListServiceUnitTest {
 
 	@Autowired
